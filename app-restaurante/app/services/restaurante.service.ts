@@ -11,12 +11,14 @@ export class RestauranteService {
     }
 
     getRestaurantes() {
-        return this._http.get("http://localhost:8080/slim/restaurantes-api.php/restaurantes")
+        return this._http.get("http://localhost/slim/restaurantes-api.php/restaurantes")
+        //return this._http.get("http://localhost:8080/slim/restaurantes-api.php/restaurantes")
             .map(res => res.json());
     }
 
     getRestaurante(id: string) {
-        return this._http.get("http://localhost:8080/slim/restaurantes-api.php/restaurante/" + id)
+        return this._http.get("http://localhost/slim/restaurantes-api.php/restaurante/" + id)
+        //return this._http.get("http://localhost:8080/slim/restaurantes-api.php/restaurante/" + id)
             .map(res => res.json());
     }
 }

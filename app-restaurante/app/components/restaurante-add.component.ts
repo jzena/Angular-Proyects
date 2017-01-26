@@ -20,6 +20,29 @@ export class RestauranteAddComponent implements OnInit {
         private _router: Router
     ) { }
 
+    onSubmit() {
+        this._restauranteService.addRestaurante(this.restaurante)
+            .subscribe(
+            response => {
+                this.status = response.status;
+                if (this.status !== "success") {
+                    alert("Error en el servidor");
+
+                }
+                else{
+                    this._router.navigate(["Home"]);
+                }
+
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage !== null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+            );        
+    }
     ngOnInit() {
         this.restaurante = new Restaurante(
             0,
@@ -30,5 +53,9 @@ export class RestauranteAddComponent implements OnInit {
             "bajo"
         );
         console.log("Componente restaurante add cargado");
+    }
+
+    callPrecio(value) {
+        this.restaurante.precio = value;
     }
 }

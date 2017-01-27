@@ -4,16 +4,16 @@ import { RestauranteService } from "../services/restaurante.service";
 import { Restaurante } from "../model/restaurante";
 
 @Component({
-    selector: "restaurantes-add",
+    selector: "restaurantes-edit",
     templateUrl: "app/view/restaurante-add.html",
     providers: [RestauranteService]//Injeccion de dependencia
 })
 
-export class RestauranteAddComponent implements OnInit {
+export class RestauranteEditComponent implements OnInit {
     public restaurante: Restaurante;
     public status: string;
     public errorMessage: string;
-    public titulo = "Crear nuevo restaurante";
+    public titulo = "Editar restaurante";
 
     constructor(
         private _restauranteService: RestauranteService,
@@ -22,7 +22,8 @@ export class RestauranteAddComponent implements OnInit {
     ) { }
 
     onSubmit() {
-        this._restauranteService.addRestaurante(this.restaurante)
+        let id = this._routeParams.get("id");
+        this._restauranteService.editRestaurante(id, this.restaurante)
             .subscribe(
             response => {
                 this.status = response.status;
@@ -46,14 +47,36 @@ export class RestauranteAddComponent implements OnInit {
     }
     ngOnInit() {
         this.restaurante = new Restaurante(
-            0,
+            parseInt(this._routeParams.get("id")),
             this._routeParams.get("nombre"),
             this._routeParams.get("direccion"),
             this._routeParams.get("descripcion"),
             "null",
-            "bajo"
+            this._routeParams.get("precio")
         );
-        console.log("Componente restaurante add cargado");
+        this.getRestaurante();
+    }
+
+    getRestaurante() {
+        let id = this._routeParams.get("id");
+        this._restauranteService.getRestaurante(id)
+            .subscribe(
+            response => {
+                this.restaurante = response.data;
+                this.status = response.status;
+                if (this.status !== "success") {
+                    //alert("Error en el servidor");
+                    this._router.navigate(["Home"]);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage !== null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la peticion");
+                }
+            }
+            );
     }
 
     callPrecio(value) {

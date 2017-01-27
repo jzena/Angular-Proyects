@@ -25,34 +25,41 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
             RestauranteService = (function () {
                 function RestauranteService(_http) {
                     this._http = _http;
+                    //public urlAPI: string = "http://localhost/slim/restaurantes-api.php/";
+                    this.urlAPI = "http://localhost:8080/slim/restaurantes-api.php/";
                 }
                 RestauranteService.prototype.getRestaurantes = function () {
-                    return this._http.get("http://localhost/slim/restaurantes-api.php/restaurantes")
+                    return this._http.get(this.urlAPI + "restaurantes")
                         .map(function (res) { return res.json(); });
                 };
-                RestauranteService.prototype.getRestaurante = function (id) {
-                    return this._http.get("http://localhost/slim/restaurantes-api.php/restaurante/" + id)
-                        .map(function (res) { return res.json(); });
+                RestauranteService.prototype.getRestaurante = function (id, random) {
+                    if (random === void 0) { random = null; }
+                    if (random == null) {
+                        return this._http.get(this.urlAPI + "restaurante/" + id)
+                            .map(function (res) { return res.json(); });
+                    }
+                    else {
+                        return this._http.get(this.urlAPI + "random-restaurante")
+                            .map(function (res) { return res.json(); });
+                    }
                 };
                 RestauranteService.prototype.addRestaurante = function (restaurante) {
                     var json = JSON.stringify(restaurante);
                     var params = "json=" + json;
                     var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-                    return this._http.post("http://localhost/slim/restaurantes-api.php/restaurantes", 
-                    //return this._http.post("http://localhost:8080/slim/restaurantes-api.php/restaurantes",
-                    params, { headers: headers })
+                    return this._http.post(this.urlAPI + "restaurantes", params, { headers: headers })
                         .map(function (res) { return res.json(); });
                 };
                 RestauranteService.prototype.editRestaurante = function (id, restaurante) {
                     var json = JSON.stringify(restaurante);
                     var params = "json=" + json;
                     var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-                    return this._http.post("http://localhost/slim/restaurantes-api.php/update-restaurante/" + id, 
-                    //return this._http.post("http://localhost:8080/slim/restaurantes-api.php/restaurantes",
-                    params, { headers: headers })
+                    return this._http.post(this.urlAPI + "update-restaurante/" + id, params, { headers: headers })
                         .map(function (res) { return res.json(); });
                 };
                 RestauranteService.prototype.deleteRestaurante = function (id) {
+                    return this._http.get(this.urlAPI + "delete-restaurante/" + id)
+                        .map(function (res) { return res.json(); });
                 };
                 RestauranteService = __decorate([
                     core_1.Injectable(), 

@@ -28,6 +28,8 @@ System.register(['angular2/core', 'angular2/router', "../services/restaurante.se
                 function RestaurantesListComponent(_restauranteService) {
                     this._restauranteService = _restauranteService;
                     this.titulo = "Listado de restaurantes:";
+                    //public urlImage: string ="http://localhost/slim/uploads/";
+                    this.urlImage = "http://localhost:8080/slim/uploads/";
                 }
                 RestaurantesListComponent.prototype.ngOnInit = function () {
                     this.loading = 'show';
@@ -48,6 +50,29 @@ System.register(['angular2/core', 'angular2/router', "../services/restaurante.se
                         }
                         //box_restaurantes.style.display = "none";
                         _this.loading = 'hide';
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.log(_this.errorMessage);
+                            alert("Error en la peticion");
+                        }
+                    });
+                };
+                RestaurantesListComponent.prototype.onBorrarConfirm = function (id) {
+                    this.confirmado = id;
+                };
+                RestaurantesListComponent.prototype.OnCancelarConfirm = function () {
+                    this.confirmado = null;
+                };
+                RestaurantesListComponent.prototype.onBorrarRestaurante = function (id) {
+                    var _this = this;
+                    this._restauranteService.deleteRestaurante(id)
+                        .subscribe(function (result) {
+                        _this.status = result.status;
+                        if (_this.status !== "success") {
+                            alert("Error en el servidor");
+                        }
+                        _this.getRestaurantes();
                     }, function (error) {
                         _this.errorMessage = error;
                         if (_this.errorMessage !== null) {

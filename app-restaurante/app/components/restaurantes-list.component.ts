@@ -16,6 +16,10 @@ export class RestaurantesListComponent implements OnInit {
     public status: string;
     public errorMessage: string;
     public loading;
+    public confirmado;
+    //public urlImage: string ="http://localhost/slim/uploads/";
+    public urlImage: string ="http://localhost:8080/slim/uploads/";
+
     constructor(private _restauranteService: RestauranteService) {
 
     }
@@ -53,5 +57,31 @@ export class RestaurantesListComponent implements OnInit {
             );
     }
 
-    //onBorrarRestaurante
+    onBorrarConfirm(id) {
+        this.confirmado = id;
+    }
+
+    OnCancelarConfirm(){
+        this.confirmado = null;
+    }
+
+    onBorrarRestaurante(id) {
+        this._restauranteService.deleteRestaurante(id)
+            .subscribe(
+            result => {
+                this.status = result.status;
+                if (this.status !== "success") {
+                    alert("Error en el servidor");
+                }
+                this.getRestaurantes();
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage !== null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la peticion");
+                }
+            }
+            );
+    }
 }

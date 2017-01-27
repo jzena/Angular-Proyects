@@ -9,24 +9,27 @@ import { Restaurante } from "../model/restaurante";
     providers: [RestauranteService]//Injeccion de dependencia
 })
 
-export class RestaurantesDetailComponent implements OnInit {    
+export class RestaurantesDetailComponent implements OnInit {
     public restaurante: Restaurante;
     public status: string;
     public errorMessage: string;
-
+    //public urlImage: string ="http://localhost/slim/uploads/";
+    public urlImage: string = "http://localhost:8080/slim/uploads/";
     constructor(
         private _restauranteService: RestauranteService,
         private _routeParams: RouteParams,
         private _router: Router
     ) { }
 
-    ngOnInit() {        
+    ngOnInit() {
         this.getRestaurante();
     }
 
     getRestaurante() {
         let id = this._routeParams.get("id");
-        this._restauranteService.getRestaurante(id)
+        let random = this._routeParams.get("random");
+
+        this._restauranteService.getRestaurante(id, random)
             .subscribe(
             response => {
                 this.restaurante = response.data;

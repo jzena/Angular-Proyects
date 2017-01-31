@@ -15,7 +15,7 @@ var PaisesComponent = (function () {
     PaisesComponent = __decorate([
         core_1.Component({
             selector: 'paises',
-            template: "\n    <h2>Paises</h2>\n    <ul>\n       <li>Espa\u00F1a</li>\n       <li>Mexico</li>\n       <li>Colombia</li>\n    </ul>\n    <ciudades></ciudades>    \n    "
+            template: "\n    <h2>Paises {{prueba}}</h2>\n    <ul>\n       <li>Espa\u00F1a</li>\n       <li>Mexico</li>\n       <li>Colombia</li>\n    </ul>      \n    "
         }), 
         __metadata('design:paramtypes', [])
     ], PaisesComponent);

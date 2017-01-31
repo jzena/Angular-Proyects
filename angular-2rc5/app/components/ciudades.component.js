@@ -9,15 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var CiudadesComponent = (function () {
-    function CiudadesComponent() {
+    function CiudadesComponent(route, router) {
+        this.route = route;
+        this.router = router;
     }
+    CiudadesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // recoger parametros url
+        this.route.params.subscribe(function (params) {
+            if (params['id'] != null) {
+                _this.codigoPostal = +params['id'];
+            }
+        });
+    };
+    CiudadesComponent.prototype.redireccion = function () {
+        this.router.navigate(['/paises']);
+    };
     CiudadesComponent = __decorate([
         core_1.Component({
             selector: 'ciudades',
-            template: "\n    <h2>Ciudades</h2>\n    <ul>\n       <li>Murcia</li>\n       <li>Valencia</li>\n       <li>Barcelona</li>\n       <li>Quito</li>\n       <li>Mexico DF</li>\n    </ul>\n    "
+            template: "\n    <h2>Ciudades</h2>\n    <ul *ngIf=\"!codigoPostal\">\n       <li>Murcia</li>\n       <li>Valencia</li>\n       <li>Barcelona</li>\n       <li>Quito</li>\n       <li>Mexico DF</li>              \n    </ul>\n\n    <p *ngIf=\"codigoPostal\">C\u00F3digo postal: {{codigoPostal}}</p>\n    <button (click)=\"redireccion()\">Ver paises</button>\n    "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router])
     ], CiudadesComponent);
     return CiudadesComponent;
 }());

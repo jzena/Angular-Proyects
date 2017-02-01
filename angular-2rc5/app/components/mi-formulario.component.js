@@ -8,20 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// Importar Component desde el núcleo de Angular
 var core_1 = require('@angular/core');
-// Decorador component, indicamos en que etiqueta se va a cargar la plantilla
-var AppComponent = (function () {
-    function AppComponent() {
+var MiFormularioComponent = (function () {
+    function MiFormularioComponent() {
+        this.enviado = false;
+        this.categorias = ['Acción', 'Terror', 'Comedia', 'Aventura'];
+        this.pelicula = { 'titulo': '', 'categoria': '' };
     }
-    AppComponent = __decorate([
+    MiFormularioComponent.prototype.onSubmit = function () {
+        this.enviado = true;
+    };
+    MiFormularioComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n             <h1>Rutas con Angular 2 !! victorroblesweb.es</h1> \n             <nav>\n                  <a routerLink=\"/paises\">Paises</a>\n                  <a routerLink=\"/ciudades\">Ciudades</a>\n                  <a routerLink=\"/la-ciudad/12\">La ciudad</a>\n                  <a routerLink=\"/mi-formulario\">Mi formulario</a>\n             </nav>\n             <router-outlet></router-outlet>\n    "
+            selector: 'mi-formluario',
+            templateUrl: 'app/views/mi-formulario.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], MiFormularioComponent);
+    return MiFormularioComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.MiFormularioComponent = MiFormularioComponent;
+//# sourceMappingURL=mi-formulario.component.js.map

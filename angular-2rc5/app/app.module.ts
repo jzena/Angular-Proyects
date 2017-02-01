@@ -1,6 +1,8 @@
 // Modulos 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule, JsonpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 // Config router
 import { routing, appRoutingProviders } from './app.routing'
@@ -9,15 +11,19 @@ import { routing, appRoutingProviders } from './app.routing'
 import { AppComponent } from './app.component';
 import { PaisesComponent } from './components/paises.component';
 import { CiudadesComponent } from './components/ciudades.component';
+import { MiFormularioComponent } from './components/mi-formulario.component';
 
 @NgModule({
   imports: [BrowserModule,
-            routing
-           ],
+    HttpModule,
+    FormsModule,
+    routing
+  ],
   declarations: [AppComponent,
-                 PaisesComponent,
-                 CiudadesComponent
-                ],
+    PaisesComponent,
+    CiudadesComponent,
+    MiFormularioComponent
+  ],
   providers: [
     appRoutingProviders
   ],

@@ -1,0 +1,16 @@
+"use strict";
+var router_1 = require("@angular/router");
+var empleados_list_component_1 = require("./components/empleados-list.component");
+var empleado_add_component_1 = require("./components/empleado-add.component");
+var appRoutes = [
+    {
+        path: '',
+        redirectTo: '/',
+        pathMatch: 'full'
+    },
+    { path: '', component: empleados_list_component_1.EmpleadosListComponent },
+    { path: 'crear-empleado', component: empleado_add_component_1.EmpleadoAddComponent }
+];
+exports.appRputingProviders = [];
+exports.routing = router_1.RouterModule.forRoot(appRoutes);
+//# sourceMappingURL=app.routing.js.map

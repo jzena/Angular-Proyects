@@ -1,0 +1,24 @@
+<h1>{{titulo}}</h1>
+<form #formEmpleado="ngForm" (ngSubmit)="onSubmit()">
+    <label>Nombre</label>
+    <p>
+        <input type="text" #nombre="ngModel" [(ngModel)]="empleado.Name" name="nombre" required>
+        <span *ngIf="!nombre.valid && nombre.touched">El nombre es obligatorio</span>
+    </p>
+    <label>Email</label>
+    <p>
+        <input type="text" #email="ngModel" [(ngModel)]="empleado.Email" name="email" required>
+        <span *ngIf="!email.valid && email.touched">El email es obligatorio</span>
+    </p>
+    <label>Country</label>
+    <p>
+        <input type="text" #country="ngModel" [(ngModel)]="empleado.Country" name="country" required>
+        <span *ngIf="!country.valid && country.touched">El país es obligatorio</span>
+    </p>
+    <label>Manager</label>
+    <p>
+        <input type="text" #manager="ngModel" [(ngModel)]="empleado.ManagerName" name="manager" required>
+        <span *ngIf="!manager.valid && manager.touched">El Manager es obligatorio</span>
+    </p>
+    <input type="submit" value="{{titulo}}" [disabled]=!formEmpleado.form.valid>
+</form>

@@ -15,6 +15,7 @@ var app_component_1 = require("./app.component");
 var app_routing_1 = require("./app.routing");
 var empleados_list_component_1 = require("./components/empleados-list.component");
 var empleado_add_component_1 = require("./components/empleado-add.component");
+var empleado_edit_component_1 = require("./components/empleado-edit.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,6 +26,7 @@ AppModule = __decorate([
         imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.routing],
         declarations: [app_component_1.AppComponent,
             empleados_list_component_1.EmpleadosListComponent,
+            empleado_edit_component_1.EmpleadoEditComponent,
             empleado_add_component_1.EmpleadoAddComponent],
         providers: [app_routing_1.appRputingProviders],
         bootstrap: [app_component_1.AppComponent]

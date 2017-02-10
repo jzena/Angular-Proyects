@@ -48,4 +48,24 @@ export class EmpleadosListComponent implements OnInit {
             }
             );
     }
+
+    onDelete(id) {
+        this._empleadoService.deleteEmployee(id)
+        .subscribe(
+            result=> {
+                this.status = result.status;
+                if (this.status !== "success") {
+                    alert("Error en el servidor");
+                }
+                this.getEmpleados();
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage !== null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la peticion");
+                }
+            }
+        );
+    }
 }

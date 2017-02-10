@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { EmpleadosListComponent } from './components/empleados-list.component';
 import { EmpleadoAddComponent } from './components/empleado-add.component';
+import { EmpleadoEditComponent } from './components/empleado-edit.component';
 
 const appRoutes: Routes = [
     {
@@ -13,7 +14,8 @@ const appRoutes: Routes = [
         pathMatch: 'full'
     },
     {path: '', component: EmpleadosListComponent},
-    {path: 'crear-empleado', component: EmpleadoAddComponent}
+    {path: 'crear-empleado', component: EmpleadoAddComponent},
+    {path: 'editar-empleado/:id', component: EmpleadoEditComponent}
 ];
 
 export const appRputingProviders: any[] = [];

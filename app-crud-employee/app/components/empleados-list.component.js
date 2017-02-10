@@ -41,6 +41,23 @@ var EmpleadosListComponent = (function () {
             }
         });
     };
+    EmpleadosListComponent.prototype.onDelete = function (id) {
+        var _this = this;
+        this._empleadoService.deleteEmployee(id)
+            .subscribe(function (result) {
+            _this.status = result.status;
+            if (_this.status !== "success") {
+                alert("Error en el servidor");
+            }
+            _this.getEmpleados();
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage !== null) {
+                console.log(_this.errorMessage);
+                alert("Error en la peticion");
+            }
+        });
+    };
     return EmpleadosListComponent;
 }());
 EmpleadosListComponent = __decorate([

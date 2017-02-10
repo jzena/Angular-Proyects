@@ -6,8 +6,8 @@ import { Empleado } from '../model/empleado';
 
 @Injectable()
 export class EmpleadoService {
-    //public urlEmployee: string = "http://localhost/CRUDMVC5Eemployee/api/ManageEmployee/";
-    public urlEmployee: string = "http://localhost:50873/api/ManageEmployee/";
+    public urlEmployee: string = "http://localhost/CRUDMVC5Eemployee/api/ManageEmployee/";
+    //public urlEmployee: string = "http://localhost:50873/api/ManageEmployee/";
     constructor(private _http: Http) {
     }
 
@@ -16,12 +16,15 @@ export class EmpleadoService {
             .map(res => res.json());
     }
 
+    getEmployeeById(id: Number) {
+        return this._http.get(this.urlEmployee + "GetByID/" + id)
+            .map(res => res.json());
+    }
+
     addEmployee(empleado: Empleado) {
         //var data = { Name : empleado.Name};
         //data.Name = empleado.Name;
-
         //let params = JSON.stringify(data);
-
         //Search on google: API controller : get JSON object from HTTP body
         //http://stackoverflow.com/questions/14407458/webapi-multiple-put-post-parameters
         //http://www.dotnetcurry.com/aspnet/1278/aspnet-webapi-pass-multiple-parameters-action-method
@@ -30,9 +33,24 @@ export class EmpleadoService {
         let params = "json=" + json;
         let headers = new Headers({ 'content-type': 'application/x-www-form-urlencoded' });
 
-        console.log(params);
-        return this._http.post(this.urlEmployee + "PostEmployee",
+        //console.log(params);
+        return this._http.post(this.urlEmployee + "AddEmployee",
             params, { headers: headers })
+            .map(res => res.json());
+    }
+
+    editEmplyee(id: string, empleado: Empleado) {
+        let json = JSON.stringify(empleado);
+        let params = "json=" + json;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        //console.log(params);
+        return this._http.post(this.urlEmployee + "EditEmployee/" + id,
+            params, { headers: headers })
+            .map(res => res.json());
+    }
+
+    deleteEmployee(id: string) {
+        return this._http.get(this.urlEmployee + "DeleteEmployee/" + id)
             .map(res => res.json());
     }
 }

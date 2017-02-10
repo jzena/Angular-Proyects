@@ -11,11 +11,13 @@ import { routing, appRputingProviders } from './app.routing';
 
 import { EmpleadosListComponent } from './components/empleados-list.component';
 import { EmpleadoAddComponent } from './components/empleado-add.component';
+import { EmpleadoEditComponent } from './components/empleado-edit.component';
 
 @NgModule({
   imports: [BrowserModule, HttpModule, FormsModule, routing],
   declarations: [AppComponent,
     EmpleadosListComponent,
+    EmpleadoEditComponent,
     EmpleadoAddComponent],
   providers: [appRputingProviders],
   bootstrap: [AppComponent]

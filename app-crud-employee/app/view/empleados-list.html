@@ -8,11 +8,11 @@
         <div class="image"></div>
         <div class="data">
             <h4>{{item.Name}}</h4>
-            <p>{{item.Email}}</p>
+            <p>{{item.Email}}</p>            
             <p>
                 <a routerLink="/">Ver</a>
-                <a routerLink="/">Editar</a>
-                <a routerLink="/">eliminar</a>
+                <a routerLink="/editar-empleado/{{item.ID}}">Editar</a>
+                <a (click)="onDelete(item.ID)">eliminar</a>
             </p>
         </div>
         <div class="clearfix"></div>

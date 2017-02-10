@@ -12,24 +12,43 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var EmpleadoService = (function () {
+    //public urlEmployee: string = "http://localhost:50873/api/ManageEmployee/";
     function EmpleadoService(_http) {
         this._http = _http;
-        //public urlEmployee: string = "http://localhost/CRUDMVC5Eemployee/api/ManageEmployee/";
-        this.urlEmployee = "http://localhost:50873/api/ManageEmployee/";
+        this.urlEmployee = "http://localhost/CRUDMVC5Eemployee/api/ManageEmployee/";
     }
     EmpleadoService.prototype.getEmployee = function () {
         return this._http.get(this.urlEmployee + "")
+            .map(function (res) { return res.json(); });
+    };
+    EmpleadoService.prototype.getEmployeeById = function (id) {
+        return this._http.get(this.urlEmployee + "GetByID/" + id)
             .map(function (res) { return res.json(); });
     };
     EmpleadoService.prototype.addEmployee = function (empleado) {
         //var data = { Name : empleado.Name};
         //data.Name = empleado.Name;
         //let params = JSON.stringify(data);
+        //Search on google: API controller : get JSON object from HTTP body
+        //http://stackoverflow.com/questions/14407458/webapi-multiple-put-post-parameters
+        //http://www.dotnetcurry.com/aspnet/1278/aspnet-webapi-pass-multiple-parameters-action-method
         var json = JSON.stringify(empleado);
         var params = "json=" + json;
         var headers = new http_1.Headers({ 'content-type': 'application/x-www-form-urlencoded' });
-        console.log(params);
-        return this._http.post(this.urlEmployee + "PostEmployee", params, { headers: headers })
+        //console.log(params);
+        return this._http.post(this.urlEmployee + "AddEmployee", params, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    EmpleadoService.prototype.editEmplyee = function (id, empleado) {
+        var json = JSON.stringify(empleado);
+        var params = "json=" + json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        //console.log(params);
+        return this._http.post(this.urlEmployee + "EditEmployee/" + id, params, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    EmpleadoService.prototype.deleteEmployee = function (id) {
+        return this._http.get(this.urlEmployee + "DeleteEmployee/" + id)
             .map(function (res) { return res.json(); });
     };
     return EmpleadoService;

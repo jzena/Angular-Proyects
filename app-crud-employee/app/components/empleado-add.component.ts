@@ -35,7 +35,7 @@ export class EmpleadoAddComponent implements OnInit {
                     alert("Error en el servidor");
                 }
                 else {
-                    console.log(response);
+                    //console.log(response);
                     this._router.navigate(["/"]);
                 }
             },

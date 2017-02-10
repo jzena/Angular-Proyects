@@ -14,13 +14,17 @@ require("rxjs/add/operator/map");
 var EmpleadoService = (function () {
     function EmpleadoService(_http) {
         this._http = _http;
-        this.urlEmployee = "http://localhost/CRUDMVC5Eemployee/api/ManageEmployee/";
+        //public urlEmployee: string = "http://localhost/CRUDMVC5Eemployee/api/ManageEmployee/";
+        this.urlEmployee = "http://localhost:50873/api/ManageEmployee/";
     }
     EmpleadoService.prototype.getEmployee = function () {
         return this._http.get(this.urlEmployee + "")
             .map(function (res) { return res.json(); });
     };
     EmpleadoService.prototype.addEmployee = function (empleado) {
+        //var data = { Name : empleado.Name};
+        //data.Name = empleado.Name;
+        //let params = JSON.stringify(data);
         var json = JSON.stringify(empleado);
         var params = "json=" + json;
         var headers = new http_1.Headers({ 'content-type': 'application/x-www-form-urlencoded' });

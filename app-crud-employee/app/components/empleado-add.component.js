@@ -31,7 +31,7 @@ var EmpleadoAddComponent = (function () {
                 alert("Error en el servidor");
             }
             else {
-                console.log(response);
+                //console.log(response);
                 _this._router.navigate(["/"]);
             }
         }, function (error) {
